@@ -1,0 +1,56 @@
+<?php
+
+namespace App\Livewire\Salaires;
+
+use App\Models\Salaire;
+use Livewire\Component;
+use Illuminate\Support\Carbon;
+
+class SalaireImpression extends Component
+{
+  public $date_virement;
+  public $dateVirement;
+  public $mois;
+  public $annee;
+  protected $rules = [
+    'date_virement' => 'required|regex:/^\d{2}\/\d{4}$/',
+  ];
+
+  protected $messages = [
+    'date_virement.required' => 'La date de virement est requise.',
+    'date_virement.regex' => 'Le format de la date doit être MM/YYYY (ex: 03/2024).',
+  ];
+
+  public function afficherSalaires()
+  {
+    $this->validate();
+    // Convertir la date du format m/Y en Carbon
+    $this->dateVirement = Carbon::createFromFormat('m/Y', $this->date_virement);
+    $this->mois = $this->dateVirement->format('m');
+    $this->annee = $this->dateVirement->year;
+    // Pas besoin d'appeler render explicitement
+  }
+
+  public function imprimerPDF()
+  {
+    $mois = $this->mois;
+    $annee = $this->annee;
+    $this->dispatch('ouvrir-pdf', route('salaires.impression.pdf', [
+      'mois' => $mois,
+      'annee' => $annee,
+    ]));
+  }
+
+  public function render()
+  {
+    $salaires = collect();
+    if ($this->mois && $this->annee) {
+      $salaires = Salaire::with('personne')
+        ->whereMonth('date_virement', $this->mois)
+        ->whereYear('date_virement', $this->annee)
+        ->get();
+        //dd($salaires);
+    }
+    return view('livewire.salaires.salaire-impression', compact('salaires'));
+  }
+}
