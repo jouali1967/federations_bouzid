@@ -27,6 +27,8 @@ use App\Livewire\Augmentations\CreateAugmentation;
 use App\Http\Controllers\EtatDeclaresPdfController;
 use App\Http\Controllers\EtatEmployesPdfController;
 use App\Http\Controllers\SalaireImpressionPdfController;
+use App\Livewire\PermissionManager;
+use App\Http\Controllers\PermissionController;
 
 Route::get('/', function () {
   return redirect('/login');
@@ -70,5 +72,10 @@ Route::middleware(['auth'])->group(function () {
   Route::get('/etat-employes', EtatEmployes::class)->name('editions.employes');
   Route::get('/etat-employes/pdf', [EtatEmployesPdfController::class, 'generate'])->name('etat.employes.pdf');
   Route::get('/etat-employes/download', [EtatEmployesPdfController::class, 'download'])->name('etat.employes.download');
+  // Route pour gérer les permissions
+  Route::get('/permissions/manage', PermissionManager::class)->name('manage.permissions');
 
 });
+
+
+

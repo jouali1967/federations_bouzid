@@ -4,6 +4,7 @@ namespace App\Livewire\Personnes;
 
 use Livewire\Component;
 use App\Models\Personne;
+use Illuminate\Support\Facades\DB;
 
 class CreatePersonne extends Component
 {
@@ -74,9 +75,29 @@ class CreatePersonne extends Component
 
   public function render()
   {
+/*$personnes = Personne::select('id','nom', 'prenom') // Manque l'ID !
+    ->with('inscriptions:id,personne_id,num_cnss')
+    ->withCount('enfants')
+    ->get();
+    foreach ($personnes as $personne) {
+    $numCnss = $personne->inscriptions->first()->num_cnss ?? 'Non inscrit';
+    echo $personne->nom . ' ' . $personne->prenom . ' - CNSS: ' . $numCnss . ' - Enfants: ' . $personne->enfants_count . PHP_EOL;
+}*/
+/*$personnes = Personne::select('id','nom', 'prenom')
+    ->with('inscriptions:id,personne_id,num_cnss')
+    ->with(['declarations' => function ($query) {
+        $query->select('id', 'personne_id', 'mont_dec', 'date_dec')
+            ->whereRaw('YEAR(date_dec) = (SELECT YEAR(MAX(date_dec)) FROM declarations)')
+            ->whereRaw('MONTH(date_dec) = (SELECT MONTH(MAX(date_dec)) FROM declarations)')
+            ->orderBy('date_dec', 'desc');
+            // Retiré le limit(1) temporairement
+    }])
+    ->withCount('enfants')
+    ->get();
+    dd($personnes);*/
+
     return view('livewire.personnes.create-personne');
   }
-
   public function save()
   {
     try {

@@ -28,4 +28,7 @@ class Enfant extends Model
   public function personne(){
     return $this->belongsTo(Personne::class);
   }
+  public function enfant(){
+    return $this->belongsTo(Personne::class);
+  }
 }

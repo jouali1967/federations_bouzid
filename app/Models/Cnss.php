@@ -25,5 +25,7 @@ class Cnss extends Model
         : null,
     );
   }
-
+  public function personne(){
+    return $this->belongsTo(Personne::class);
+  }
 }

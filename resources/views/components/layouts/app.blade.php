@@ -22,7 +22,7 @@
   <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="{{ asset('dist/datepicker/flatpickr.min.css') }}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/style.css">
-
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.css') }}" />
   <!--end::Required Plugin(AdminLTE)-->
   @livewireStyles
@@ -189,175 +189,13 @@
       <div class="sidebar-wrapper">
         <nav class="mt-2">
           <!--begin::Sidebar Menu-->
-          <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
-            <li class="nav-item {{ request()->routeIs('personnes.*') ? 'menu-open' : '' }}">
-              <a href="#" class="nav-link {{ request()->routeIs('personnes.*') ? 'active' : '' }}">
-                <i class="nav-icon bi bi-speedometer"></i>
-                <p>
-                  Employes
-                  <i class="nav-arrow bi bi-chevron-right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a wire:navigate href="{{ route('personnes.create') }}"
-                    class="nav-link {{ request()->routeIs('personnes.create') ? 'active' : '' }}">
-                    <i class="nav-icon bi bi-circle"></i>
-                    <p>Ajouter Employé</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a wire:navigate href="{{ route('personnes.index') }}"
-                    class="nav-link {{ request()->routeIs('personnes.index') ? 'active' : '' }}">
-                    <i class="nav-icon bi bi-circle"></i>
-                    <p>Liste Employés</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item {{ request()->routeIs('primes.*') ? 'menu-open' : '' }}">
-              <a href="#" class="nav-link {{ request()->routeIs('primes.*') ? 'active' : '' }}">
-                <i class="nav-icon bi bi-box-seam-fill"></i>
-                <p>
-                  Primes
-                  <i class="nav-arrow bi bi-chevron-right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a wire:navigate href="{{ route('primes.create') }}"
-                    class="nav-link {{ request()->routeIs('primes.create') ? 'active' : '' }}">
-                    <i class="nav-icon bi bi-circle"></i>
-                    <p>Ajouter Prime</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a wire:navigate href="{{ route('primes.index') }}"
-                    class="nav-link {{ request()->routeIs('primes.index') ? 'active' : '' }}">
-                    <i class="nav-icon bi bi-circle"></i>
-                    <p>Liste Primes</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item {{ request()->routeIs('sanctions.*') ? 'menu-open' : '' }}">
-              <a href="#" class="nav-link {{ request()->routeIs('sanctions.*') ? 'active' : '' }}">
-                <i class="nav-icon bi bi-question-circle-fill"></i>
-                <p>
-                  Sanctions
-                  <i class="nav-arrow bi bi-chevron-right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a wire:navigate href="{{ route('sanctions.create') }}"
-                    class="nav-link {{ request()->routeIs('sanctions.create') ? 'active' : '' }}">
-                    <i class="nav-icon bi bi-circle"></i>
-                    <p>Ajouter Sanction</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a wire:navigate href="{{ route('sanctions.index') }}"
-                    class="nav-link {{ request()->routeIs('sanctions.index') ? 'active' : '' }}">
-                    <i class="nav-icon bi bi-circle"></i>
-                    <p>Liste Sanctions</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item {{ request()->routeIs('salaires.*') ? 'menu-open' : '' }}">
-              <a href="#" class="nav-link {{ request()->routeIs('salaires.*') ? 'active' : '' }}">
-                <i class="nav-icon bi bi-browser-edge"></i>
-                <p>
-                  Gestions Salaires
-                  <i class="nav-arrow bi bi-chevron-right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a wire:navigate href="{{ route('salaires.gestion') }}"
-                    class="nav-link {{ request()->routeIs('salaires.gestion') ? 'active' : '' }}">
-                    <i class="nav-icon bi bi-circle"></i>
-                    <p>Salaires</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a wire:navigate href="{{ route('salaires.impression') }}"
-                    class="nav-link {{ request()->routeIs('salaires.impression') ? 'active' : '' }}">
-                    <i class="nav-icon bi bi-circle"></i>
-                    <p>Impression salaires</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a wire:navigate href="{{ route('enfants.create') }}"
-                class="nav-link {{ request()->routeIs('enfants.create') ? 'active' : '' }}">
-                <i class="nav-icon bi bi-ui-checks-grid"></i>
-                <p>Gestion des Enfants</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a wire:navigate href="{{ route('cnss.create') }}"
-                class="nav-link {{ request()->routeIs('cnss.create') ? 'active' : '' }}">
-                <i class="nav-icon bi bi-star-half"></i>
-                <p>Gestion Cnss</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a wire:navigate href="{{ route('declarations.create') }}"
-                class="nav-link {{ request()->routeIs('declarations.create') ? 'active' : '' }}">
-                <i class="nav-icon bi bi-grip-horizontal"></i>
-                <p>Montants Declarés</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a wire:navigate href="{{ route('augmentations.create') }}"
-                class="nav-link {{ request()->routeIs('augmentations.create') ? 'active' : '' }}">
-                <i class="nav-icon bi bi-grip-horizontal"></i>
-                <p>Augmentations</p>
-              </a>
-            </li>
-            {{-- --}}
-            <li class="nav-item {{ request()->routeIs('editions.*') ? 'menu-open' : '' }}">
-              <a href="#" class="nav-link {{ request()->routeIs('editions.*') ? 'active' : '' }}">
-                <i class="nav-icon bi bi-browser-edge"></i>
-                <p>
-                  Editions
-                  <i class="nav-arrow bi bi-chevron-right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a wire:navigate href="{{ route('editions.employes') }}"
-                    class="nav-link {{ request()->routeIs('editions.employes') ? 'active' : '' }}">
-                    <i class="nav-icon bi bi-circle"></i>
-                    <p>Liste des employés</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a wire:navigate href="{{ route('editions.pdf') }}"
-                    class="nav-link {{ request()->routeIs('editions.pdf') ? 'active' : '' }}">
-                    <i class="nav-icon bi bi-circle"></i>
-                    <p>Virement salaire</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a wire:navigate href="{{ route('editions.declares') }}"
-                    class="nav-link {{ request()->routeIs('editions.declares') ? 'active' : '' }}">
-                    <i class="nav-icon bi bi-circle"></i>
-                    <p>Employés Declarés</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-
-
-          </ul>
+          <x-layouts.dynamic-sidebar />
           <!--end::Sidebar Menu-->
         </nav>
+        <!--end::Sidebar Wrapper-->
       </div>
-      <!--end::Sidebar Wrapper-->
+      <!--end::Sidebar-->
+      <!--begin::App Main-->
     </aside>
     <!--end::Sidebar-->
     <!--begin::App Main-->
@@ -392,9 +230,12 @@
   </script>
   <script src="{{ asset('dist/datepicker/flatpickr.min.js') }}"></script>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
   <script src="{{ asset('dist/js/adminlte.js') }}"></script>
 
   @livewireScripts {{-- Laissez Livewire Scripts en dernier --}}
+
 </body>
 
 </html>
